@@ -1,4 +1,7 @@
-import { createFileRoute, Link, Outlet } from '@tanstack/react-router';
+import { createFileRoute, Outlet } from '@tanstack/react-router';
+import { AppSidebar } from '@/components/layout/app-sidebar';
+import { SiteHeader } from '@/components/layout/site-header';
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 
 export const Route = createFileRoute('/_authenticated')({
 	component: AuthenticatedLayout,
@@ -6,38 +9,25 @@ export const Route = createFileRoute('/_authenticated')({
 
 function AuthenticatedLayout() {
 	return (
-		<div className="flex min-h-screen">
-			{/* Sidebar */}
-			<aside className="w-64 bg-gray-900 text-white">
-				<div className="p-4">
-					<h2 className="text-xl font-bold mb-6">Dashboard</h2>
-					<nav className="space-y-2">
-						<Link
-							to="/dashboard"
-							className="block px-4 py-2 rounded hover:bg-gray-800 [&.active]:bg-gray-800"
-						>
-							📊 Dashboard
-						</Link>
-						<Link
-							to="/users"
-							className="block px-4 py-2 rounded hover:bg-gray-800 [&.active]:bg-gray-800"
-						>
-							👥 Usuarios
-						</Link>
-						<Link
-							to="/settings"
-							className="block px-4 py-2 rounded hover:bg-gray-800 [&.active]:bg-gray-800"
-						>
-							⚙️ Configuración
-						</Link>
-					</nav>
+		<SidebarProvider
+			style={
+				{
+					'--sidebar-width': 'calc(var(--spacing) * 72)',
+					'--header-height': 'calc(var(--spacing) * 12)',
+				} as React.CSSProperties
+			}
+		>
+			<AppSidebar variant="inset" />
+			<SidebarInset>
+				<SiteHeader />
+				<div className="flex flex-1 flex-col">
+					<div className="@container/main flex flex-1 flex-col gap-2">
+						<div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+							<Outlet />
+						</div>
+					</div>
 				</div>
-			</aside>
-
-			{/* Contenido principal */}
-			<main className="flex-1 bg-gray-50">
-				<Outlet />
-			</main>
-		</div>
+			</SidebarInset>
+		</SidebarProvider>
 	);
 }
