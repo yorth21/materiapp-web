@@ -1,5 +1,5 @@
+import { Link } from '@tanstack/react-router';
 import { Brain, ChartColumnBig, Folder, LayoutDashboard } from 'lucide-react';
-
 import { NavMain } from '@/components/layout/nav-main';
 import { NavUser } from '@/components/layout/nav-user';
 import {
@@ -43,15 +43,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 			<SidebarHeader>
 				<SidebarMenu>
 					<SidebarMenuItem>
-						<SidebarMenuButton
-							asChild
-							className="data-[slot=sidebar-menu-button]:p-1.5!"
+						<Link
+							to="/"
+							className="p-1.5 flex flex-row gap-2 place-items-center"
 						>
-							<a href="#">
-								<Brain className="size-5!" />
-								<span className="text-base font-semibold">Acme Inc.</span>
-							</a>
-						</SidebarMenuButton>
+							<Brain className="size-5!" />
+							<span className="text-xl font-semibold">Materiapp</span>
+						</Link>
 					</SidebarMenuItem>
 				</SidebarMenu>
 			</SidebarHeader>
