@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router';
 import { Brain, ChartColumnBig, Folder, LayoutDashboard } from 'lucide-react';
-import { NavMain } from '@/components/layout/nav-main';
-import { NavUser } from '@/components/layout/nav-user';
+import { NavMain } from '@/components/navigation/nav-main';
+import { NavUser } from '@/components/navigation/nav-user';
 import {
 	Sidebar,
 	SidebarContent,
@@ -21,17 +21,17 @@ const data = {
 	navMain: [
 		{
 			title: 'Dashboard',
-			url: '#',
+			url: '/dashboard',
 			icon: LayoutDashboard,
 		},
 		{
-			title: 'Analytics',
-			url: '#',
+			title: 'My curriculum',
+			url: '/curriculum',
 			icon: ChartColumnBig,
 		},
 		{
-			title: 'Projects',
-			url: '#',
+			title: 'Recommended',
+			url: '/recommended',
 			icon: Folder,
 		},
 	],

@@ -1,6 +1,6 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router';
-import { AppSidebar } from '@/components/layout/app-sidebar';
-import { SiteHeader } from '@/components/layout/site-header';
+import { AppSidebar } from '@/components/layouts/app-sidebar';
+import { SiteHeader } from '@/components/layouts/site-header';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 
 export const Route = createFileRoute('/_authenticated')({

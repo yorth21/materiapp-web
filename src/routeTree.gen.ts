@@ -14,6 +14,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedUsersRouteImport } from './routes/_authenticated/users'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedRecommendedIndexRouteImport } from './routes/_authenticated/recommended/index'
+import { Route as AuthenticatedCurriculumIndexRouteImport } from './routes/_authenticated/curriculum/index'
 
 const AuthenticatedRoute = AuthenticatedRouteImport.update({
   id: '/_authenticated',
@@ -39,18 +41,34 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedRecommendedIndexRoute =
+  AuthenticatedRecommendedIndexRouteImport.update({
+    id: '/recommended/',
+    path: '/recommended/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedCurriculumIndexRoute =
+  AuthenticatedCurriculumIndexRouteImport.update({
+    id: '/curriculum/',
+    path: '/curriculum/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/users': typeof AuthenticatedUsersRoute
+  '/curriculum': typeof AuthenticatedCurriculumIndexRoute
+  '/recommended': typeof AuthenticatedRecommendedIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/users': typeof AuthenticatedUsersRoute
+  '/curriculum': typeof AuthenticatedCurriculumIndexRoute
+  '/recommended': typeof AuthenticatedRecommendedIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -59,12 +77,26 @@ export interface FileRoutesById {
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/users': typeof AuthenticatedUsersRoute
+  '/_authenticated/curriculum/': typeof AuthenticatedCurriculumIndexRoute
+  '/_authenticated/recommended/': typeof AuthenticatedRecommendedIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/settings' | '/users'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/settings'
+    | '/users'
+    | '/curriculum'
+    | '/recommended'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/settings' | '/users'
+  to:
+    | '/'
+    | '/dashboard'
+    | '/settings'
+    | '/users'
+    | '/curriculum'
+    | '/recommended'
   id:
     | '__root__'
     | '/'
@@ -72,6 +104,8 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard'
     | '/_authenticated/settings'
     | '/_authenticated/users'
+    | '/_authenticated/curriculum/'
+    | '/_authenticated/recommended/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -116,6 +150,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/recommended/': {
+      id: '/_authenticated/recommended/'
+      path: '/recommended'
+      fullPath: '/recommended'
+      preLoaderRoute: typeof AuthenticatedRecommendedIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/curriculum/': {
+      id: '/_authenticated/curriculum/'
+      path: '/curriculum'
+      fullPath: '/curriculum'
+      preLoaderRoute: typeof AuthenticatedCurriculumIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
@@ -123,12 +171,16 @@ interface AuthenticatedRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedUsersRoute: typeof AuthenticatedUsersRoute
+  AuthenticatedCurriculumIndexRoute: typeof AuthenticatedCurriculumIndexRoute
+  AuthenticatedRecommendedIndexRoute: typeof AuthenticatedRecommendedIndexRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedUsersRoute: AuthenticatedUsersRoute,
+  AuthenticatedCurriculumIndexRoute: AuthenticatedCurriculumIndexRoute,
+  AuthenticatedRecommendedIndexRoute: AuthenticatedRecommendedIndexRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
